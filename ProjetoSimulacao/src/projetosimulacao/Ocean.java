@@ -6,6 +6,12 @@ package projetosimulacao;
  */
 public class Ocean
 {
+    
+    private Fish[][] fishes;
+    private Seaweed[][] seaweeds;
+    private int height;
+    private int width;
+    
     /**
      * Represent an ocean of the given dimensions.
      * @param height The height of the ocean.
@@ -13,7 +19,17 @@ public class Ocean
      */
     public Ocean(int height, int width)
     {
+        this.height = height;
+        this.width = width;
+        
+        fishes = new Fish[height][width];
+        seaweeds = new Seaweed[height][width];
+        
+        //fishes[1][1] = new Shark();
+        
         // some code needs to go here
+        
+        
     }
     
     /**
@@ -24,8 +40,10 @@ public class Ocean
      */
     public Fish getFishAt(int row, int col)
     {
-        // put code here
-        return null;
+        if (row < 0 || row >= height || col < 0 || col >= width)
+            return null;
+        
+        return fishes[row][col];
     }
     
     /**
@@ -33,8 +51,7 @@ public class Ocean
      */
     public int getHeight()
     {
-        // put something here
-        return 200;
+        return height;
     }
     
     /**
@@ -42,7 +59,27 @@ public class Ocean
      */
     public int getWidth()
     {
-        // and something here
-        return 200;
+        return width;
+    }
+    
+    public void placeFish(Fish fish, int rol, int col){
+        fishes[rol][col] = fish;
+    }
+    
+    public void placeFish(Fish fish, Location loc){
+        fishes[loc.getRow()][loc.getCol()] = fish;
+    }
+    
+    public void placeSeaweed(Seaweed seaweed, int rol, int col){
+        seaweeds[rol][col] = seaweed;
+    }
+    
+    public void clear(){
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                fishes[i][j] = null;
+                seaweeds[i][j] = null;
+            }
+        }
     }
 }
