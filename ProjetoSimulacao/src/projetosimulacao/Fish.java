@@ -9,7 +9,7 @@ package projetosimulacao;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Fish
+public abstract class Fish
 {
 	/**
 	 * Constructor for objects of class Fish

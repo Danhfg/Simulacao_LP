@@ -125,7 +125,7 @@ public class SimulatorView extends JFrame
                 } else {
                     //oceanView.drawMark(col, row, EMPTY_COLOR);
                     //Color c = seaColors[ ocean.getSeaweedAt(row, col).getAmount() ];
-                    Seaweed sw = ocean.getSeaweedAt(row, col);
+                    Resource sw = ocean.getResourceAt(row, col);
                     if (sw != null){
                         Color c = seaColors[sw.getAmount()];
                         oceanView.drawMark(col, row,  c);

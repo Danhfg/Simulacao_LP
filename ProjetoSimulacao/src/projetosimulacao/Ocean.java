@@ -9,7 +9,7 @@ public class Ocean
 {
     
     private Fish[][] fishes;
-    private Seaweed[][] seaweeds;
+    private Resource[][] resources;
     private int height;
     private int width;
     
@@ -24,13 +24,13 @@ public class Ocean
         this.width = width;
         
         fishes = new Fish[height][width];
-        seaweeds = new Seaweed[height][width];
+        resources = new Seaweed[height][width];
         
         Random rng = new Random();
         
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                seaweeds[i][j] = new Seaweed(rng.nextInt(11));
+                resources[i][j] = new Seaweed(rng.nextInt(11), 10);
                 //System.out.print(seaweeds[i][j].getAmount() + " ");
             }
             //System.out.println("");
@@ -57,13 +57,13 @@ public class Ocean
         return fishes[row][col];
     }
     
-    public Seaweed getSeaweedAt(int row, int col)
+    public Resource getResourceAt(int row, int col)
     {
         if (row < 0 || row >= height || col < 0 || col >= width)
             return null;
        
         
-        return seaweeds[row][col];
+        return resources[row][col];
     }
     
     /**
@@ -91,14 +91,14 @@ public class Ocean
     }
     
     public void placeSeaweed(Seaweed seaweed, int rol, int col){
-        seaweeds[rol][col] = seaweed;
+        resources[rol][col] = seaweed;
     }
     
     public void clear(){
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 fishes[i][j] = null;
-                seaweeds[i][j] = null;
+                resources[i][j] = null;
             }
         }
     }
