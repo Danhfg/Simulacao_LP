@@ -1,5 +1,6 @@
 package projetosimulacao;
 
+import java.util.Random;
 
 /**
  * (Fill in description and author info here)
@@ -25,6 +26,16 @@ public class Ocean
         fishes = new Fish[height][width];
         seaweeds = new Seaweed[height][width];
         
+        Random rng = new Random();
+        
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                seaweeds[i][j] = new Seaweed(rng.nextInt(11));
+                //System.out.print(seaweeds[i][j].getAmount() + " ");
+            }
+            //System.out.println("");
+        }
+        
         //fishes[1][1] = new Shark();
         
         // some code needs to go here
@@ -44,6 +55,15 @@ public class Ocean
             return null;
         
         return fishes[row][col];
+    }
+    
+    public Seaweed getSeaweedAt(int row, int col)
+    {
+        if (row < 0 || row >= height || col < 0 || col >= width)
+            return null;
+       
+        
+        return seaweeds[row][col];
     }
     
     /**

@@ -31,6 +31,8 @@ public class SimulatorView extends JFrame
     
     // A map for storing colors for participants in the simulation
     private HashMap<Class<? extends Fish>,Color> colors;
+    
+    private Color[] seaColors;
     // A statistics object computing and storing simulation information
     private OceanStats stats;
 
@@ -59,6 +61,20 @@ public class SimulatorView extends JFrame
         pack();
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
+        // definindo cores do mar (com base na quantidade de algas)
+        seaColors = new Color[]{new Color (230, 230, 255), 
+                                new Color (220,220,255),
+                                new Color (200,200,255),
+                                new Color (190,190,255),
+                                new Color (180,180,255),
+                                new Color (170,170,255),
+                                new Color (160,160,255),
+                                new Color (150,150,255),
+                                new Color (140,140,255),
+                                new Color (130,130,255),
+                                new Color (130,130,255),
+                                new Color (130,130,255)};
                 
     }
     
@@ -106,9 +122,18 @@ public class SimulatorView extends JFrame
                 if(fish != null) {
                     stats.incrementCount(fish.getClass());
                     oceanView.drawMark(col, row, getColor(fish.getClass()));
-                }
-                else {
-                    oceanView.drawMark(col, row, EMPTY_COLOR);
+                } else {
+                    //oceanView.drawMark(col, row, EMPTY_COLOR);
+                    //Color c = seaColors[ ocean.getSeaweedAt(row, col).getAmount() ];
+                    Seaweed sw = ocean.getSeaweedAt(row, col);
+                    if (sw != null){
+                        Color c = seaColors[sw.getAmount()];
+                        oceanView.drawMark(col, row,  c);
+                    } else {
+                        oceanView.drawMark(col, row, EMPTY_COLOR);
+                    }
+                    
+                    
                 }
             }
         }
