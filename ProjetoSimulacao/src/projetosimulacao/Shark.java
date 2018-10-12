@@ -17,18 +17,18 @@ public class Shark extends Fish {
         setHunger(0);
         setAge(0);
         setBreedingAge(8);
-        setBreedingProbability(0.2);
+        setBreedingProbability(0.385);
         setHungerMax(10);
-        setMaxAge(20);
+        setMaxAge(10);
         setMaxLitterSize(2);
     }
 
     public void act(List<Fish> newFishes) {
 
         incrementAge();
-        lessHunger();
+        moreHunger();
         if (isAlive()) {
-            if (super.getAge() == super.getMaxAge()) {
+            if (super.getAge() == super.getMaxAge() || super.getHunger() == super.getHungerMax()) {
                 setDead();
             } else {
                 giveBirth(newFishes);

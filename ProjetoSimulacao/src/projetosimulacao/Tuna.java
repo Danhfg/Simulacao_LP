@@ -14,19 +14,20 @@ public class Tuna extends Fish {
         super(ocean, location);
         setHunger(0);
         setAge(0);
-        setBreedingAge(8);
-        setBreedingProbability(0.3);
+        setBreedingAge(7);
+        setBreedingProbability(0.5);
         setHungerMax(7);
-        setMaxAge(20);
-        setMaxLitterSize(5);
+        setMaxAge(10);
+        setMaxLitterSize(4);
     }
 
     public void act(List<Fish> newFishes) {
 
         incrementAge();
-        lessHunger();
+        moreHunger();
+        
         if (isAlive()) {
-            if (super.getAge() == super.getMaxAge()) {
+            if (super.getAge() == super.getMaxAge() || super.getHunger() == super.getHungerMax()) {
                 setDead();
             }else{
                 giveBirth(newFishes);

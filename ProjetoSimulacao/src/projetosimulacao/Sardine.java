@@ -17,19 +17,19 @@ public class Sardine extends Fish {
         setHunger(0);
         setAge(0);
         setBreedingAge(5);
-        setBreedingProbability(0.50);
+        setBreedingProbability(0.2);
         setHungerMax(5);
         setMaxAge(10);
-        setMaxLitterSize(10);
+        setMaxLitterSize(2);
     }
 
     @Override
     public void act(List<Fish> newActors) {
 
         incrementAge();
-        lessHunger();
+        moreHunger();
         if (isAlive()) {
-            if (super.getAge() == super.getMaxAge()) {
+            if (super.getAge() == super.getMaxAge() || super.getHunger() == super.getHungerMax()) {
                 setDead();
             } else {
                 giveBirth(newActors);
