@@ -32,4 +32,8 @@ public abstract class Fish extends Actor {
         getOcean().placeFish(this, newLocation);
     }
 
+    public boolean isAlive(){
+        return true;
+    }
+    
 }

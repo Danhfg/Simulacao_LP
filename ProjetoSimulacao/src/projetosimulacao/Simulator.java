@@ -3,6 +3,8 @@ package projetosimulacao;
 import java.awt.Color;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,10 +23,11 @@ public class Simulator {
     private SimulatorView simView;
     private ArrayList<Fish> fishes;
     private ArrayList<Resource> resources;
-    
 
     private int height;
     private int width;
+    
+    private int step;
 
     private Random rng;
 
@@ -33,6 +36,7 @@ public class Simulator {
         sim.clear();
         sim.generateResources();
         sim.populate();
+        
         sim.run(1000);
         //System.exit(0);
     }
@@ -54,8 +58,8 @@ public class Simulator {
         
         fishes = new ArrayList();
         resources = new ArrayList();
-        
-        
+             
+        step = 0;
 
     }
     
@@ -110,13 +114,42 @@ public class Simulator {
                 total++;
             }
         }
-    
 
     }
-
+    
     public void run(int steps) {
         // put the simulation main loop here
+        runOneStep();
+        for (int i = 0; i < steps && simView.isViable(ocean); i++) {
+            runOneStep();
+        }
         
-        simView.showStatus(0, ocean);
+    }
+    
+    public void runOneStep(){
+        step++;
+        
+        // Provide space for newborn animals.
+        List<Fish> newFishes = new ArrayList<Fish>();        
+        // Let all rabbits act.
+        for(Iterator<Fish> it = fishes.iterator(); it.hasNext(); ) {
+            Fish fish = it.next();
+            fish.act(newFishes);
+            if(! fish.isAlive()) {
+                it.remove();
+            }
+        }
+        
+        // Add the newly born foxes and rabbits to the main lists.
+        fishes.addAll(newFishes);
+        
+        // atualiza os recursos no mapa        
+        for(Iterator<Resource> it = resources.iterator(); it.hasNext(); ) {
+            Resource resource = it.next();
+            
+            resource.act(null);
+        }
+ 
+        simView.showStatus(step, ocean);
     }
 }

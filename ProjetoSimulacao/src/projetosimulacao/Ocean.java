@@ -25,27 +25,7 @@ public class Ocean
         
         fishes = new Fish[height][width];
         resources = new Resource[height][width];
-        
-        
-        
-        //fishes[1][1] = new Shark();
-        
-        // some code needs to go here
-        
-        
-    }
-    
-    public void generateResources(){
-        Random rng = new Random();
-        
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                
-                resources[i][j] = new Seaweed(this, new Location(i,j), rng.nextInt(11), 10);
-                //System.out.print(seaweeds[i][j].getAmount() + " ");
-            }
-            //System.out.println("");
-        }
+
     }
     
     /**

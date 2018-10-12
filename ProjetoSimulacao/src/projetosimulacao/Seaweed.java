@@ -41,8 +41,8 @@ public class Seaweed extends Resource {
     }
 
     @Override
-    public void act(List newActors) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void act(java.util.List<? extends Actor> newActors) {
+        
     }
 
 }
