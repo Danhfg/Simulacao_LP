@@ -15,26 +15,15 @@ import java.util.Random;
  */
 public class Sardine extends Fish
 {
-    private static final int HUNGER_MAX = 5; //nvl máx de fome antes da morte.
-    
-    private int hunger; // nivel de fome atual da sardinha.
-    
-    // The age at which a rabbit can start to breed.
-    private static final int BREEDING_AGE = 5;
-    // The age to which a rabbit can live.
-    private static final int MAX_AGE = 40;
-    // The likelihood of a rabbit breeding.
-    private static final double BREEDING_PROBABILITY = 0.15;
-    // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 4;
-    // A shared random number generator to control breeding.
-    private static final Random rand = new Random();
-    
-    private int age; // a idade da sardinha
-    
     public Sardine(Ocean ocean, Location location) {
         super(ocean, location);
-        this.hunger = 0;
+        setHunger(0);
+        setAge(0);
+        setBREEDING_AGE(5);
+        setBREEDING_PROBABILITY(0.15);
+        setHUNGER_MAX(5);
+        setMAX_AGE(40);
+        setMAX_LITTER_SIZE(4);
     }
 
     @Override
@@ -61,60 +50,6 @@ public class Sardine extends Fish
             }
         }
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    /**
-     * Increase the age. This could result in the fox's death.
-     */
-    private void incrementAge()
-    {
-        age++;
-        if(age > MAX_AGE) {
-            setDead();
-        }
-    }
-    
-    /**
-     * Makes this fish more hungry
-     */
-    private void moreHunger()
-    {
-        hunger++;
-        if(hunger > HUNGER_MAX) {
-            setDead();
-        }
-    }  
-    
-    /**
-     * Make this fish less hungry. This could result in the fox's death.
-     */
-    private void lessHunger()
-    {
-        if(hunger > 0) {
-            hunger--;
-        }
-    }   
-    
-    /**
-     * Generate a number representing the number of births,
-     * if it can breed.
-     * @return The number of births (may be zero).
-     */
-    private int breed()
-    {
-        int births = 0;
-        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
-            births = rand.nextInt(MAX_LITTER_SIZE) + 1;
-        }
-        return births;
-    }
-
-    /**
-     * A fox can breed if it has reached the breeding age.
-     */
-    private boolean canBreed()
-    {
-        return age >= BREEDING_AGE;
     }
     
     /**

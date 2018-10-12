@@ -13,48 +13,22 @@ import java.util.Iterator;
  */
 public class Shark extends Fish
 {
-    private static final int HUNGER_MAX = 10; //nvl máx de fome antes da morte.
-    
-    private int hunger; // nivel de fome atual do Tubarão.
-    
-    // The age at which a rabbit can start to breed.
-    private static final int BREEDING_AGE = 5;
-    // The age to which a rabbit can live.
-    private static final int MAX_AGE = 40;
-    // The likelihood of a rabbit breeding.
-    private static final double BREEDING_PROBABILITY = 0.15;
-    // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 4;
 
     public Shark(Ocean ocean, Location location) {
         super(ocean, location);
+        setHunger(0);
+        setAge(0);
+        setBREEDING_AGE(5);
+        setBREEDING_PROBABILITY(0.15);
+        setHUNGER_MAX(5);
+        setMAX_AGE(40);
+        setMAX_LITTER_SIZE(4);
     }
 
     public void act(List<Fish> newFishes) {
         
     }
 
-    
-    /**
-     * Makes this fish more hungry
-     */
-    private void moreHunger()
-    {
-        hunger++;
-        if(hunger > HUNGER_MAX) {
-            setDead();
-        }
-    }  
-    
-    /**
-     * Make this fish less hungry. This could result in the fox's death.
-     */
-    private void lessHunger()
-    {
-        if(hunger > 0) {
-            hunger--;
-        }
-    }
     
     /**
      * Tell the sardine to look for Seaweed adjacent to its current location.
