@@ -16,6 +16,12 @@ public class Tuna extends Fish
     public Tuna(Ocean ocean, Location location) {
         super(ocean, location);
         setHunger(0);
+        setAge(0);
+        setBREEDING_AGE(5);
+        setBREEDING_PROBABILITY(0.15);
+        setHUNGER_MAX(5);
+        setMAX_AGE(40);
+        setMAX_LITTER_SIZE(4);
     }
 
     @Override

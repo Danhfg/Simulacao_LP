@@ -140,4 +140,54 @@ public abstract class Fish extends Actor {
         return hunger;
     }
 
+    public int getHUNGER_MAX() {
+        return HUNGER_MAX;
+    }
+
+    public void setHUNGER_MAX(int HUNGER_MAX) {
+        this.HUNGER_MAX = HUNGER_MAX;
+    }
+
+    public int getBREEDING_AGE() {
+        return BREEDING_AGE;
+    }
+
+    public void setBREEDING_AGE(int BREEDING_AGE) {
+        this.BREEDING_AGE = BREEDING_AGE;
+    }
+
+    public int getMAX_AGE() {
+        return MAX_AGE;
+    }
+
+    public void setMAX_AGE(int MAX_AGE) {
+        this.MAX_AGE = MAX_AGE;
+    }
+
+    public double getBREEDING_PROBABILITY() {
+        return BREEDING_PROBABILITY;
+    }
+
+    public void setBREEDING_PROBABILITY(double BREEDING_PROBABILITY) {
+        this.BREEDING_PROBABILITY = BREEDING_PROBABILITY;
+    }
+
+    public int getMAX_LITTER_SIZE() {
+        return MAX_LITTER_SIZE;
+    }
+
+    public void setMAX_LITTER_SIZE(int MAX_LITTER_SIZE) {
+        this.MAX_LITTER_SIZE = MAX_LITTER_SIZE;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+    
+    
+
 }
