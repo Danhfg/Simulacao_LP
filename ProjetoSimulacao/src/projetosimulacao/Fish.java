@@ -1,5 +1,7 @@
 package projetosimulacao;
 
+import java.util.Random;
+
 /**
  * Write a description of class Fish here.
  *
@@ -9,7 +11,25 @@ package projetosimulacao;
  * @version (a version number or a date)
  */
 public abstract class Fish extends Actor {
-
+    
+    private int HUNGER_MAX; //nvl máx de fome antes da morte.
+    
+    private int hunger; // nivel de fome atual do peixe.
+    
+    // The age at which a rabbit can start to breed.
+    private int BREEDING_AGE;
+    // The age to which a fish can live.
+    private int MAX_AGE;
+    // The likelihood of a fish breeding.
+    private double BREEDING_PROBABILITY;
+    // The maximum number of births.
+    private int MAX_LITTER_SIZE;
+    
+    private int age; // a idade da sardinha
+    
+    // A shared random number generator to control breeding.
+    private static final Random rand = new Random();
+    
     private boolean alive; // variável que informa o status de vida do peixe.
     /**
      * Constructor for objects of class Fish
@@ -54,6 +74,70 @@ public abstract class Fish extends Actor {
     
     public boolean isAlive() {
         return alive;
+    }
+    
+    
+
+    /**
+     * Increase the age. This could result in the fox's death.
+     */
+    protected void incrementAge()
+    {
+        age++;
+        if(age > MAX_AGE) {
+            setDead();
+        }
+    }
+    
+    /**
+     * Makes this fish more hungry
+     */
+    protected void moreHunger()
+    {
+        hunger++;
+        if(hunger > HUNGER_MAX) {
+            setDead();
+        }
+    }  
+    
+    /**
+     * Make this fish less hungry. This could result in the fox's death.
+     */
+    protected void lessHunger()
+    {
+        if(hunger > 0) {
+            hunger--;
+        }
+    }   
+    
+    /**
+     * Generate a number representing the number of births,
+     * if it can breed.
+     * @return The number of births (may be zero).
+     */
+    protected int breed()
+    {
+        int births = 0;
+        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
+            births = rand.nextInt(MAX_LITTER_SIZE) + 1;
+        }
+        return births;
+    }
+
+    /**
+     * A fox can breed if it has reached the breeding age.
+     */
+    private boolean canBreed()
+    {
+        return age >= BREEDING_AGE;
+    }
+
+    public void setHunger(int hunger) {
+        this.hunger = hunger;
+    }
+
+    public int getHunger() {
+        return hunger;
     }
 
 }
