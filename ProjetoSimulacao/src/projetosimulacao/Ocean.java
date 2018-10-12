@@ -24,27 +24,8 @@ public class Ocean
         this.width = width;
         
         fishes = new Fish[height][width];
-        resources = new Seaweed[height][width];
-        
-        
-        
-        //fishes[1][1] = new Shark();
-        
-        // some code needs to go here
-        
-        
-    }
-    
-    public void generateResources(){
-        Random rng = new Random();
-        
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                resources[i][j] = new Seaweed(rng.nextInt(11), 10);
-                //System.out.print(seaweeds[i][j].getAmount() + " ");
-            }
-            //System.out.println("");
-        }
+        resources = new Resource[height][width];
+
     }
     
     /**
@@ -94,9 +75,14 @@ public class Ocean
         fishes[loc.getRow()][loc.getCol()] = fish;
     }
     
-    public void placeSeaweed(Seaweed seaweed, int rol, int col){
-        resources[rol][col] = seaweed;
+    public void placeResource(Resource resource, int rol, int col){
+        resources[rol][col] = resource;
     }
+    
+    public void placeResource(Resource resource, Location loc){
+        resources[loc.getRow()][loc.getCol()] = resource;
+    }
+   
     
     public void clear(){
         for (int i = 0; i < height; i++) {
@@ -105,6 +91,11 @@ public class Ocean
                 resources[i][j] = null;
             }
         }
+    }
+    
+    public void clear(Location location){
+        
+        fishes[location.getRow()][location.getCol()] = null;
     }
 
     

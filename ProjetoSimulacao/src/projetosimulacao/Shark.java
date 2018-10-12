@@ -1,5 +1,7 @@
 package projetosimulacao;
 
+import java.awt.List;
+
 
 /**
  * A simple model of a shark.
@@ -10,5 +12,15 @@ package projetosimulacao;
  */
 public class Shark extends Fish
 {
+
+    public Shark(Ocean ocean, Location location) {
+        super(ocean, location);
+    }
+
+    @Override
+    public void act(java.util.List<? extends Actor> newActors) {
+        
+    }
+
     
 }
