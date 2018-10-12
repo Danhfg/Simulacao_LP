@@ -16,18 +16,18 @@ import java.util.Random;
  */
 public abstract class Fish extends Actor {
     
-    private int HUNGER_MAX; //nvl máx de fome antes da morte.
+    private int hungerMax; //nvl máx de fome antes da morte.
     
     private int hunger; // nivel de fome atual do peixe.
     
     // The age at which a rabbit can start to breed.
-    private int BREEDING_AGE;
+    private int breedingAge;
     // The age to which a fish can live.
-    private int MAX_AGE;
+    private int maxAge;
     // The likelihood of a fish breeding.
-    private double BREEDING_PROBABILITY;
+    private double breedingProbability;
     // The maximum number of births.
-    private int MAX_LITTER_SIZE;
+    private int maxLitterSize;
     
     private int age; // a idade da sardinha
     
@@ -89,7 +89,7 @@ public abstract class Fish extends Actor {
     protected void incrementAge()
     {
         age++;
-        if(age > MAX_AGE) {
+        if(age > maxAge) {
             setDead();
         }
     }
@@ -100,7 +100,7 @@ public abstract class Fish extends Actor {
     protected void moreHunger()
     {
         hunger++;
-        if(hunger > HUNGER_MAX) {
+        if(hunger > hungerMax) {
             setDead();
         }
     }  
@@ -123,8 +123,8 @@ public abstract class Fish extends Actor {
     protected int breed()
     {
         int births = 0;
-        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
-            births = rand.nextInt(MAX_LITTER_SIZE) + 1;
+        if(canBreed() && rand.nextDouble() <= breedingProbability) {
+            births = rand.nextInt(maxLitterSize) + 1;
         }
         return births;
     }
@@ -134,7 +134,7 @@ public abstract class Fish extends Actor {
      */
     private boolean canBreed()
     {
-        return age >= BREEDING_AGE;
+        return age >= breedingAge;
     }
 
     public void setHunger(int hunger) {
@@ -145,44 +145,44 @@ public abstract class Fish extends Actor {
         return hunger;
     }
 
-    public int getHUNGER_MAX() {
-        return HUNGER_MAX;
+    public int getHungerMax() {
+        return hungerMax;
     }
 
-    public void setHUNGER_MAX(int HUNGER_MAX) {
-        this.HUNGER_MAX = HUNGER_MAX;
+    public void setHungerMax(int hungerMax) {
+        this.hungerMax = hungerMax;
     }
 
-    public int getBREEDING_AGE() {
-        return BREEDING_AGE;
+    public int getBreedingAge() {
+        return breedingAge;
     }
 
-    public void setBREEDING_AGE(int BREEDING_AGE) {
-        this.BREEDING_AGE = BREEDING_AGE;
+    public void setBreedingAge(int breedingAge) {
+        this.breedingAge = breedingAge;
     }
 
-    public int getMAX_AGE() {
-        return MAX_AGE;
+    public int getMaxAge() {
+        return maxAge;
     }
 
-    public void setMAX_AGE(int MAX_AGE) {
-        this.MAX_AGE = MAX_AGE;
+    public void setMaxAge(int maxAge) {
+        this.maxAge = maxAge;
     }
 
-    public double getBREEDING_PROBABILITY() {
-        return BREEDING_PROBABILITY;
+    public double getBreedingProbability() {
+        return breedingProbability;
     }
 
-    public void setBREEDING_PROBABILITY(double BREEDING_PROBABILITY) {
-        this.BREEDING_PROBABILITY = BREEDING_PROBABILITY;
+    public void setBreedingProbability(double breedingProbability) {
+        this.breedingProbability = breedingProbability;
     }
 
-    public int getMAX_LITTER_SIZE() {
-        return MAX_LITTER_SIZE;
+    public int getMaxLitterSize() {
+        return maxLitterSize;
     }
 
-    public void setMAX_LITTER_SIZE(int MAX_LITTER_SIZE) {
-        this.MAX_LITTER_SIZE = MAX_LITTER_SIZE;
+    public void setMaxLitterSize(int maxLitterSize) {
+        this.maxLitterSize = maxLitterSize;
     }
 
     public int getAge() {
