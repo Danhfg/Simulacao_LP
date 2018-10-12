@@ -1,6 +1,7 @@
 package projetosimulacao;
 
 import java.awt.Color;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
@@ -64,24 +65,25 @@ public class Simulator {
             }
         }
 
-        Pair< Class<? extends Fish>, Integer>[] max;
-        max = new Pair[]{ new Pair(Shark.class , MAX_SHARKS),
-                          new Pair(Sardine.class, MAX_SARDINES ),
-                          new Pair(Tuna.class, MAX_TUNAS)};
+        int[] max;
+        max = new int[]{ MAX_SHARKS, MAX_SARDINES, MAX_TUNAS};
 
-        
         int total = 0;
+        
         for (int i = 0; i < max.length; i++) {
-            for (int j = 0; j < max[i].getY(); j++) {
+            for (int j = 0; j < max[i]; j++) {
                 int pos = rng.nextInt(height*width - total);
                 
-                try {
-                    ocean.placeFish(max[i].getX().newInstance(), locs.get(pos));
-                } catch (InstantiationException ex) {
-                    Logger.getLogger(Simulator.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IllegalAccessException ex) {
-                    Logger.getLogger(Simulator.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                Fish fish;
+                
+                if(i==0)
+                    fish = new Shark(ocean, locs.get(pos));
+                else if (i==1)
+                    fish = new Sardine(ocean, locs.get(pos));
+                else 
+                    fish = new Tuna(ocean, locs.get(pos));
+                
+                ocean.placeFish(fish, locs.get(pos));  
                 
                 total++;
             }

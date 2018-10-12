@@ -24,7 +24,7 @@ public class Ocean
         this.width = width;
         
         fishes = new Fish[height][width];
-        resources = new Seaweed[height][width];
+        resources = new Resource[height][width];
         
         
         
@@ -40,7 +40,8 @@ public class Ocean
         
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                resources[i][j] = new Seaweed(rng.nextInt(11), 10);
+                
+                resources[i][j] = new Seaweed(this, new Location(i,j), rng.nextInt(11), 10);
                 //System.out.print(seaweeds[i][j].getAmount() + " ");
             }
             //System.out.println("");
@@ -94,8 +95,8 @@ public class Ocean
         fishes[loc.getRow()][loc.getCol()] = fish;
     }
     
-    public void placeSeaweed(Seaweed seaweed, int rol, int col){
-        resources[rol][col] = seaweed;
+    public void placeResource(Resource resource, int rol, int col){
+        resources[rol][col] = resource;
     }
     
     public void clear(){
@@ -105,6 +106,11 @@ public class Ocean
                 resources[i][j] = null;
             }
         }
+    }
+    
+    public void clear(Location location){
+        
+        fishes[location.getRow()][location.getCol()] = null;
     }
 
     

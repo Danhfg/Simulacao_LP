@@ -1,5 +1,7 @@
 package projetosimulacao;
 
+import java.awt.List;
+
 
 /**
  * A simple model of a shark.
@@ -10,5 +12,14 @@ package projetosimulacao;
  */
 public class Shark extends Fish
 {
+
+    public Shark(Ocean ocean, Location location) {
+        super(ocean, location);
+    }
+
+    @Override
+    public void act(List newActors) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

@@ -9,14 +9,21 @@ package projetosimulacao;
  *
  * @author felipemorais2013
  */
-public abstract class Resource {
+public abstract class Resource extends Actor {
     
     public static final int MAX_AMOUNT = 10;
     
     private int amount;
     private int maxAmount = MAX_AMOUNT;
     
-    public Resource(int amount, int maxAmount){
+    /**
+     *
+     * @param amount
+     * @param maxAmount
+     */
+    public Resource(Ocean ocean, Location location, int amount, int maxAmount){
+        super(ocean, location);
+        
         this.amount = amount;
         this.maxAmount = maxAmount;
     }

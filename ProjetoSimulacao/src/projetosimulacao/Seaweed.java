@@ -5,6 +5,8 @@
  */
 package projetosimulacao;
 
+import java.awt.List;
+
 /**
  *
  * @author felipemorais2013
@@ -18,9 +20,9 @@ public class Seaweed extends Resource {
     private int regenThreshold = REGEN_THRESHOLD; // a partir desse valor, a alga começa a se regenerar
     private int regenValue; // valor atual de regen da alga
 
-    public Seaweed(int amount, int maxAmount) {
+    public Seaweed(Ocean ocean, Location location, int amount, int maxAmount) {
         //this.amount = amount;
-        super(amount, maxAmount);
+        super(ocean, location, amount, maxAmount);
         this.regenValue = 0;
     }
     
@@ -36,6 +38,11 @@ public class Seaweed extends Resource {
 
     public void setRegenValue(int regenValue) {
         this.regenValue = regenValue;
+    }
+
+    @Override
+    public void act(List newActors) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -5,12 +5,60 @@
  */
 package projetosimulacao;
 
+import java.awt.List;
+
 /**
  *
  * @author felipemorais2013
  */
-public class Actor {
-    public Actor(){
-        
+public abstract class Actor {
+    private Ocean ocean;
+    
+    private Location location;
+    
+    /**
+     * Create a new actor at location in ocean.
+     * 
+     * @param ocean The ocean currently occupied.
+     * @param location The location within the field.
+     */
+    public Actor(Ocean ocean, Location location){
+        this.ocean = ocean;
+        this.location = location;
     }
+    
+    
+    /**
+     * Make this actor act - that is: make it do
+     * whatever it wants/needs to do.
+     * @param newActors A list to add newly created actors to.
+     */
+    public abstract void act(List newActors);
+    
+     /**
+     * Return the animal's location.
+     * @return The animal's location.
+     */
+    public Location getLocation()
+    {
+        return location;
+    }
+    
+    /**
+     * Return the actors's ocean.
+     * @return The actors's ocean.
+     */
+    public Ocean getOcean()
+    {
+        return ocean;
+    }
+    
+    /**
+     * Place the actor at the new location in the given ocean.
+     * @param newLocation The actors's new location.
+     */
+    public void setLocation(Location newLocation){
+        location = newLocation;
+    }
+    
 }
