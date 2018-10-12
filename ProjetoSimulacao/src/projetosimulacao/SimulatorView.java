@@ -75,6 +75,8 @@ public class SimulatorView extends JFrame
                                 new Color (130,130,255),
                                 new Color (130,130,255),
                                 new Color (130,130,255)};
+        
+
                 
     }
     

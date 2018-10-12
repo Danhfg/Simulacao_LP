@@ -35,7 +35,10 @@ public abstract class Resource extends Actor {
     }
 
     public void setAmount(int amount) {
-        this.amount = amount;
+        if (amount < 0)
+            this.amount = 0;
+        else
+            this.amount = amount;
     }
 
     public int getMaxAmount() {

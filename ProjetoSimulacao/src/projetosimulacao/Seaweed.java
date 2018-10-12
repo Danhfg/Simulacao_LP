@@ -14,39 +14,33 @@ import java.util.Random;
  */
 public class Seaweed extends Resource {
 
-    
-    public static final int REGEN_THRESHOLD = 3;
+    public static final float REGEN_THRESHOLD = 0.0f;
 
-    
-    private int regenThreshold = REGEN_THRESHOLD; // a partir desse valor, a alga começa a se regenerar
-    private int regenValue; // valor atual de regen da alga
+    private float regenThreshold = REGEN_THRESHOLD; // a partir desse valor, a alga começa a se regenerar
 
     public Seaweed(Ocean ocean, Location location, int amount, int maxAmount) {
         //this.amount = amount;
         super(ocean, location, amount, maxAmount);
-        this.regenValue = 0;
     }
-    
 
-    public int getRegenThreshold() {
+    public float getRegenThreshold() {
         return regenThreshold;
     }
 
-
-    public int getRegenValue() {
-        return regenValue;
-    }
-
-    public void setRegenValue(int regenValue) {
-        this.regenValue = regenValue;
-    }
-
     public void act(Random rng) {
-        int a = super.getAmount();
-        if (a == Resource.MAX_AMOUNT)
-            super.setAmount(0);
-        else
-            super.setAmount(a + 1);
+        
+        float b = rng.nextFloat();
+
+        if (b > regenThreshold) {
+            int a = super.getAmount();
+            
+            if (a == Resource.MAX_AMOUNT) {
+                super.setAmount(0);
+            } else {
+                super.setAmount(a + 1);
+            }
+        }
+
     }
 
 }
