@@ -26,14 +26,7 @@ public abstract class Actor {
         this.ocean = ocean;
         this.location = location;
     }
-    
-    
-    /**
-     * Make this actor act - that is: make it do
-     * whatever it wants/needs to do.
-     * @param newActors A list to add newly created actors to.
-     */
-    public abstract void act(List<? extends Actor> newActors);
+
     
      /**
      * Return the animal's location.

@@ -147,7 +147,7 @@ public class Simulator {
         for(Iterator<Resource> it = resources.iterator(); it.hasNext(); ) {
             Resource resource = it.next();
             
-            resource.act(null);
+            resource.act(rng);
         }
  
         simView.showStatus(step, ocean);

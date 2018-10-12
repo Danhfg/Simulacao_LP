@@ -1,5 +1,7 @@
 package projetosimulacao;
 
+import java.util.List;
+
 /**
  * Write a description of class Fish here.
  *
@@ -10,11 +12,16 @@ package projetosimulacao;
  */
 public abstract class Fish extends Actor {
 
+    private boolean alive; // variável que informa o status de vida do peixe.
     /**
      * Constructor for objects of class Fish
+     * @param ocean oceano no qual o peixe está
+     * @param location localização no ocean do peixe
+     * 
      */
     public Fish(Ocean ocean, Location location) {
         super(ocean, location);
+        this.alive = true;
     }
 
     /**
@@ -32,8 +39,25 @@ public abstract class Fish extends Actor {
         getOcean().placeFish(this, newLocation);
     }
 
-    public boolean isAlive(){
-        return true;
+
+    /**
+     * Indicate that the fish is no longer alive.
+     * It is removed from the ocean.
+     */
+    public void setDead()
+    {
+        Location location = getLocation();
+        this.alive = false;
+        if(location != null) {
+            getOcean().clear(location);
+            location = null;
+            //getOcean() = null;
+        }
     }
     
+    public boolean isAlive() {
+        return alive;
+    }
+
+    public abstract void act(List<Fish> newActors);
 }

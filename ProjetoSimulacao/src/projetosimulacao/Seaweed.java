@@ -5,7 +5,8 @@
  */
 package projetosimulacao;
 
-import java.awt.List;
+import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -40,8 +41,7 @@ public class Seaweed extends Resource {
         this.regenValue = regenValue;
     }
 
-    @Override
-    public void act(java.util.List<? extends Actor> newActors) {
+    public void act(Random rng) {
         int a = super.getAmount();
         if (a == Resource.MAX_AMOUNT)
             super.setAmount(0);

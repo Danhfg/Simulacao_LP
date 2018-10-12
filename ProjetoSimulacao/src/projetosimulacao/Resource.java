@@ -5,6 +5,8 @@
  */
 package projetosimulacao;
 
+import java.util.Random;
+
 /**
  *
  * @author felipemorais2013
@@ -43,4 +45,6 @@ public abstract class Resource extends Actor {
     public void setMaxAmount(int maxAmount) {
         this.maxAmount = maxAmount;
     }
+    
+    public abstract void act(Random rng);
 }
