@@ -42,7 +42,11 @@ public class Seaweed extends Resource {
 
     @Override
     public void act(java.util.List<? extends Actor> newActors) {
-        
+        int a = super.getAmount();
+        if (a == Resource.MAX_AMOUNT)
+            super.setAmount(0);
+        else
+            super.setAmount(a + 1);
     }
 
 }
