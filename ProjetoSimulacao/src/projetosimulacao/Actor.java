@@ -5,7 +5,7 @@
  */
 package projetosimulacao;
 
-import java.awt.List;
+import java.util.List;
 
 /**
  *
@@ -33,7 +33,7 @@ public abstract class Actor {
      * whatever it wants/needs to do.
      * @param newActors A list to add newly created actors to.
      */
-    public abstract void act(List newActors);
+    public abstract void act(List<Actor> newActors);
     
      /**
      * Return the animal's location.
