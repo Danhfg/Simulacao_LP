@@ -19,14 +19,34 @@ public class Shark extends Fish
         setHunger(0);
         setAge(0);
         setBREEDING_AGE(5);
-        setBREEDING_PROBABILITY(0.15);
-        setHUNGER_MAX(5);
+        setBREEDING_PROBABILITY(0.20);
+        setHUNGER_MAX(10);
         setMAX_AGE(40);
-        setMAX_LITTER_SIZE(4);
+        setMAX_LITTER_SIZE(2);
     }
 
     public void act(List<Fish> newFishes) {
         
+        incrementAge();
+        lessHunger();
+        if (isAlive())
+        {
+            giveBirth(newFishes);
+            Location location = getLocation();
+            Location newLocation = findFood(location);
+            if(newLocation == null) { 
+                // No food found - try to move to a free location.
+                newLocation = getOcean().freeAdjacentLocation(location);
+            }
+            // See if it was possible to move.
+            if(newLocation != null) {
+                setLocation(newLocation);
+            }
+            else {
+                // Overcrowding.
+                setDead();
+            }
+        }
     }
 
     
@@ -69,6 +89,25 @@ public class Shark extends Fish
             }
         }
         return null;
+    }
+    
+    /**
+     * Check whether or not this fox is to give birth at this step.
+     * New births will be made into free adjacent locations.
+     * @param newFoxes A list to add newly born foxes to.
+     */
+    private void giveBirth(List<Fish> newFoxes)
+    {
+        // New foxes are born into adjacent locations.
+        // Get a list of adjacent free locations.
+        Ocean ocean = getOcean();
+        List<Location> free = ocean.getFreeAdjacentLocations(getLocation());
+        int births = breed();
+        for(int b = 0; b < births && free.size() > 0; b++) {
+            Location loc = free.remove(0);
+            Shark young = new Shark(ocean, loc);
+            newFoxes.add(young);
+        }
     }
     
 }
