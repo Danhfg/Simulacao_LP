@@ -99,6 +99,11 @@ public class Ocean
         resources[rol][col] = resource;
     }
     
+    public void placeResource(Resource resource, Location loc){
+        resources[loc.getRow()][loc.getCol()] = resource;
+    }
+   
+    
     public void clear(){
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {

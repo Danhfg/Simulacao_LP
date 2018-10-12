@@ -20,6 +20,7 @@ public class Simulator {
     private Ocean ocean;
     private SimulatorView simView;
     private ArrayList<Fish> fishes;
+    private ArrayList<Resource> resources;
     
 
     private int height;
@@ -29,6 +30,8 @@ public class Simulator {
 
     public static void main(String[] args) {
         Simulator sim = new Simulator(50, 60);
+        sim.clear();
+        sim.generateResources();
         sim.populate();
         sim.run(1000);
         //System.exit(0);
@@ -48,14 +51,32 @@ public class Simulator {
         this.width = width;
 
         rng = new Random();
+        
+        fishes = new ArrayList();
+        resources = new ArrayList();
+        
+        
 
+    }
+    
+    public void clear(){
+        ocean.clear();
+    }
+    
+    public void generateResources(){
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                Location l = new Location(i,j);
+                Resource r = new Seaweed(ocean, l, rng.nextInt(11), 10);
+                resources.add(r);
+                ocean.placeResource(r, l);
+            }
+            //System.out.println("");
+        }
     }
 
     public void populate() {
         //ocean.placeFish(new Shark(), 1,1);
-
-        ocean.clear();
-        ocean.generateResources();
 
         ArrayList<Location> locs = new ArrayList();
 
@@ -84,6 +105,7 @@ public class Simulator {
                     fish = new Tuna(ocean, locs.get(pos));
                 
                 ocean.placeFish(fish, locs.get(pos));  
+                fishes.add(fish);
                 
                 total++;
             }
