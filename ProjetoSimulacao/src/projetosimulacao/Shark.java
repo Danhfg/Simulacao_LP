@@ -16,10 +16,10 @@ public class Shark extends Fish {
         super(ocean, location);
         setHunger(0);
         setAge(0);
-        setBreedingAge(8);
+        setBreedingAge(20);
         setBreedingProbability(0.385);
-        setHungerMax(10);
-        setMaxAge(10);
+        setHungerMax(20);
+        setMaxAge(40);
         setMaxLitterSize(2);
     }
 

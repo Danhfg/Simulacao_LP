@@ -19,7 +19,7 @@ public class Sardine extends Fish {
         setBreedingAge(5);
         setBreedingProbability(0.2);
         setHungerMax(5);
-        setMaxAge(10);
+        setMaxAge(20);
         setMaxLitterSize(2);
     }
 
@@ -33,19 +33,26 @@ public class Sardine extends Fish {
                 setDead();
             } else {
                 giveBirth(newActors);
-                Location location = getLocation();
-                Location newLocation = findFood(location);
-                if (newLocation == null) {
-                    // No food found - try to move to a free location.
-                    newLocation = getOcean().freeAdjacentLocation(location);
-                }
-                // See if it was possible to move.
-                if (newLocation != null) {
-                    setLocation(newLocation);
+
+                // se estiver com fome
+                if (super.getHunger() >= super.getHungerMax() / 2) {
+                    Location location = getLocation();
+                    Location newLocation = findFood(location);
+                    if (newLocation == null) {
+                        // No food found - try to move to a free location.
+                        newLocation = getOcean().freeAdjacentLocation(location);
+                    }
+                    // See if it was possible to move.
+                    if (newLocation != null) {
+                        setLocation(newLocation);
+                    } else {
+                        // Overcrowding.
+                        setDead();
+                    }
                 } else {
-                    // Overcrowding.
-                    setDead();
+
                 }
+
             }
 
         }
@@ -97,6 +104,41 @@ public class Sardine extends Fish {
         }
         return null;
 
+    }
+    
+    private List<Location> safeLocations(){
+        
+        Ocean ocean = getOcean();
+        List<Location> freeAdjacent = ocean.getFreeAdjacentLocations(getLocation());
+        Iterator<Location> it = freeAdjacent.iterator();
+        
+        boolean predator = false;
+        
+        while (it.hasNext()) {
+            
+            Location where = it.next();
+            
+            List<Location> adjacent = ocean.adjacentLocations(getLocation());
+            
+            predator = false;
+            
+            for(Location l : adjacent){
+                Fish f = ocean.getFishAt(l.getRow(), l.getCol());
+                
+                if (f!=null && !(f instanceof Sardine) ){
+                    predator = true;
+                }
+            }
+            
+            if (predator){
+                freeAdjacent.remove(where);
+            }
+        }
+        if (freeAdjacent.isEmpty())
+            return null;
+        else       
+            return freeAdjacent;
+       
     }
 
 }
