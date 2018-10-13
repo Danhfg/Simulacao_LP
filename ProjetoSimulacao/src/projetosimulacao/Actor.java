@@ -7,13 +7,22 @@ package projetosimulacao;
 
 import java.util.List;
 
+
 /**
+ * Abstract class that represents a Actor
  *
- * @author felipemorais2013
+ * This is a superclass to all specific tyes of actor in the simulation
+ *
+ * @author Daniel Henrique
+ * @author Felipe Morais
+ * 
+ * @version 12/10/18
  */
 public abstract class Actor {
+    // Actor's ocean
     private Ocean ocean;
     
+    // Actor's location
     private Location location;
     
     /**

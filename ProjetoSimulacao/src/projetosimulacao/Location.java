@@ -4,7 +4,10 @@ package projetosimulacao;
  * Represent a location in a rectangular grid.
  * 
  * @author David J. Barnes and Michael Kolling
- * @version 2008.03.30
+ * @author Daniel Henrique
+ * @author Felipe Morais
+ * 
+ * @version 12/10/18
  */
 public class Location
 {

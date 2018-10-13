@@ -17,8 +17,8 @@ public class Sardine extends Fish {
         super(ocean, location);
         setHunger(0);
         setAge(0);
-        setBreedingAge(5);
-        setBreedingProbability(0.2);
+        setBreedingAge(8);
+        setBreedingProbability(0.3);
         setHungerMax(5);
         setMaxAge(20);
         setMaxLitterSize(2);
