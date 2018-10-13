@@ -10,9 +10,17 @@ import java.util.Random;
  * plankton. They exhibit flocking behaviour - they tend to seek company. If
  * they spot a predator close by, they panic.
  *
+ * @author Daniel Henrique
+ * @author Felipe Morais
  */
 public class Sardine extends Fish {
 
+    /**
+     * Construtor Para a classe Sandine
+     *
+     * @param ocean Oceano no qual as sardinhas estão 
+     * @param location Localização da sardinha
+     */
     public Sardine(Ocean ocean, Location location) {
         super(ocean, location);
         setHunger(0);
@@ -24,6 +32,11 @@ public class Sardine extends Fish {
         setMaxLitterSize(2);
     }
 
+    /**
+     * Função para fazer com que a Sardinha coma, fuja e nade.
+     *
+     * @param newActors Lista com os peixes do oceano
+     */
     @Override
     public void act(List<Fish> newActors) {
 
@@ -80,10 +93,9 @@ public class Sardine extends Fish {
     }
 
     /**
-     * Check whether or not this fox is to give birth at this step. New births
-     * will be made into free adjacent locations.
+     * Verifique se esta sardinha pode ter filhos nesse passo.
      *
-     * @param newFoxes A list to add newly born foxes to.
+     * @param newFoxes Lista para adicionar as sardinhas que nasceram .
      */
     private void giveBirth(List<Fish> newFoxes) {
         // New foxes are born into adjacent locations.
@@ -99,11 +111,10 @@ public class Sardine extends Fish {
     }
 
     /**
-     * Tell the sardine to look for Seaweed adjacent to its current location.
-     * Only the first live seaweed is eaten.
+     * Procura uma alga perto da sardinha para ela se alimentar.
      *
-     * @param location Where in the oncean it is located.
-     * @return Where food was found, or null if it wasn't.
+     * @param location Localização atual da sardinha para ela procurar comida.
+     * @return Onde a comida foi encontrada, ou nula se não foi.
      */
     private Location findFood(Location location) {
         Ocean ocean = getOcean();
@@ -125,7 +136,12 @@ public class Sardine extends Fish {
         return null;
 
     }
-
+    
+        /**
+     * Procura posições segurar para a sardinha nadar.
+     *
+     * @return Retorna uma lista de localizações seguras.
+     */
     private List<Location> safeLocations() {
 
         Ocean ocean = getOcean();
@@ -163,7 +179,11 @@ public class Sardine extends Fish {
         }
 
     }
-    
+    /**
+     * Localização para para fazer as sardinhas se agruparem.
+     *
+     * @return Retorna a posição com sardinhas para a atual se agrupar.
+     */
     private Location agroup(){
         Ocean ocean = getOcean();
         List<Location> freeAdjacent = ocean.getFreeAdjacentLocations(getLocation());

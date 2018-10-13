@@ -12,7 +12,10 @@ import java.util.HashMap;
  * setColor method.
  * 
  * @author David J. Barnes and Michael Kolling
- * @version 2003.12.22
+ * @version 2018.10.12
+ * @author Daniel Henrique
+ * @author Felipe Morais
+ * 
  */
 public class SimulatorView extends JFrame
 {

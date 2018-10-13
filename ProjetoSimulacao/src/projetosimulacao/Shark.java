@@ -9,9 +9,18 @@ import java.util.Iterator;
  * to swim next to each other
  *
  * @author Richard Jones and Michael Kolling
+ * @author Daniel Henrique
+ * @author Felipe Morais
+ * 
  */
 public class Shark extends Fish {
 
+    /**
+     * Método construtor da classe Shark
+     *
+     * @param ocean Oceano no qual o Tubarão está
+     * @param location Localização no oceano do Tubarão
+     */
     public Shark(Ocean ocean, Location location) {
         super(ocean, location);
         setHunger(0);
@@ -23,6 +32,11 @@ public class Shark extends Fish {
         setMaxLitterSize(2);
     }
 
+    /**
+     * Função que faz o Tubarão nadar e comer.
+     *
+     * @param newFishes A lista com os Peixes
+     */
     public void act(List<Fish> newFishes) {
 
         incrementAge();
@@ -51,15 +65,14 @@ public class Shark extends Fish {
     }
 
     /**
-     * Tell the sardine to look for Seaweed adjacent to its current location.
-     * Only the first live seaweed is eaten.
+     * Procura um Atum ou uma Sardinha perto do tubarão para ele se alimentar.
      *
-     * @param location Where in the oncean it is located.
-     * @return Where food was found, or null if it wasn't.
+     * @param location Localização atual do tubarão para ele procurar comida.
+     * @return Onde a comida foi encontrada, ou nula se não foi.
      */
     private Location findFood(Location location) {
         Ocean ocean = getOcean();
-        List<Location> adjacent = ocean.adjacentLocations(getLocation());
+        List<Location> adjacent = ocean.adjacentLocations(location);
         Iterator<Location> it = adjacent.iterator();
         while (it.hasNext()) {
             Location where = it.next();
@@ -92,10 +105,9 @@ public class Shark extends Fish {
     }
 
     /**
-     * Check whether or not this fox is to give birth at this step. New births
-     * will be made into free adjacent locations.
+     * Checa se o tubarão deve ou não ter um filho no próximo passo.
      *
-     * @param newFoxes A list to add newly born foxes to.
+     * @param newFoxes Uma lita para adicionar os tubarões que nasceram.
      */
     private void giveBirth(List<Fish> newFoxes) {
         // New foxes are born into adjacent locations.
@@ -111,11 +123,11 @@ public class Shark extends Fish {
     }
 
     /**
-     * Tell the sardine to look for Seaweed adjacent to its current location.
-     * Only the first live seaweed is eaten.
-     *
-     * @param location Where in the oncean it is located.
-     * @return Where food was found, or null if it wasn't.
+     * A função busca, caso posível, uma posição livre de tubarões para o 
+     * tubarão nadar.
+     * 
+     * @param location
+     * @return Retorna a melhor localização para o tubarão andar 
      */
     public Location getSharkFreeAdjacentLocation(Location location)
     {
@@ -138,25 +150,28 @@ public class Shark extends Fish {
         }
     }
     
+    /**
+     * A função verifica se uma localizaçao possui tubarões por perto.
+     * 
+     * @param location Localização para procurar ausência de tubarão 
+     * @return Retorna True se a localização não possui tubarões perto
+     */
     public boolean issharkFreeAdjacentLocation(Location location)
     {
         // The available free ones.
         Ocean ocean = getOcean();
         List<Location> locs = ocean.adjacentLocations(location);
-        int cont = 0; // contador de quantos tubarões tem na proximidade;
+        int sharks = 0; // contador de quantos tubarões tem na proximidade;
         
         Iterator<Location> it = locs.iterator();
         while (it.hasNext()) {
             Location where = it.next();
             Object fish = ocean.getFishAt(where.getRow(), where.getCol());
             if (fish instanceof Shark) {
-                cont++;
+                sharks++;
             }
         }
-        if (cont == 1){
-            return true;
-        }
-        return false;
+        return sharks == 1;
     }
 
 }
