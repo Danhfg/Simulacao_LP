@@ -10,7 +10,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * (Fill in description and author info here)
+ * Classe Simulator que é responsável por fazer as simulações do oceano com 
+ * Tubarões, Atuns, Sardinhas e algas.
+ * 
+ * @author Daniel Henrique
+ * @author Felipe Morais
  */
 public class Simulator {
 
@@ -31,6 +35,11 @@ public class Simulator {
 
     private Random rng;
 
+    /**
+     * Método main do programa.
+     *
+     * @param args Agumentos de entrada padrão 
+     */
     public static void main(String[] args) {
         Simulator sim = new Simulator(50, 60);
         sim.clear();
@@ -41,6 +50,11 @@ public class Simulator {
         //System.exit(0);
     }
 
+    /**
+     *
+     * @param height largura da tela.
+     * @param width altura da tela.
+     */
     public Simulator(int height, int width) {
         ocean = new Ocean(height, width);
         simView = new SimulatorView(height, width);
@@ -63,10 +77,16 @@ public class Simulator {
 
     }
     
+    /**
+     *  Função para limpar o oceano
+     */
     public void clear(){
         ocean.clear();
     }
     
+    /**
+     * Função para gerar os Recursos.
+     */
     public void generateResources(){
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
@@ -79,6 +99,9 @@ public class Simulator {
         }
     }
 
+    /**
+     * Funções para popular o oceano com peixes.
+     */
     public void populate() {
         //ocean.placeFish(new Shark(), 1,1);
 
@@ -117,6 +140,11 @@ public class Simulator {
 
     }
     
+    /**
+     * Função para rodar n simulaçoes
+     *
+     * @param steps quantidade de passos para rodar
+     */
     public void run(int steps) {
         // put the simulation main loop here
         runOneStep();
@@ -126,6 +154,9 @@ public class Simulator {
         
     }
     
+    /**
+     * Função para rodar apenas uma simulaçao
+     */
     public void runOneStep(){
         step++;
         

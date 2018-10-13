@@ -7,9 +7,17 @@ import java.util.Iterator;
  * A simple model of a tuna. Tuna age, move, breed, and die. They eat herring.
  *
  * @author Richard Jones and Michael Kolling
+ * @author Daniel Henrique
+ * @author Felipe Morais
  */
 public class Tuna extends Fish {
 
+    /**
+     * Método construtor da classe Tuna
+     *
+     * @param ocean Oceano no qual o Atum está
+     * @param location Localização no oceano do Atum
+     */
     public Tuna(Ocean ocean, Location location) {
         super(ocean, location);
         setHunger(0);
@@ -21,6 +29,11 @@ public class Tuna extends Fish {
         setMaxLitterSize(4);
     }
 
+    /**
+     * Função que faz o atum nadar e comer.
+     *
+     * @param newFishes A lista com os Peixes
+     */
     public void act(List<Fish> newFishes) {
 
         incrementAge();
@@ -49,11 +62,10 @@ public class Tuna extends Fish {
     }
 
     /**
-     * Tell the Tuna to look for Sardine adjacent to its current location. Only
-     * the first live seaweed is eaten.
+     * Procura uma Sardinha perto do Atum para ele se alimentar.
      *
-     * @param location Where in the oncean it is located.
-     * @return Where food was found, or null if it wasn't.
+     * @param location Localização atual do Atum para ele procurar comida.
+     * @return Onde a comida foi encontrada, ou nula se não foi.
      */
     private Location findFood(Location location) {
         Ocean ocean = getOcean();
@@ -76,10 +88,9 @@ public class Tuna extends Fish {
     }
 
     /**
-     * Check whether or not this fox is to give birth at this step. New births
-     * will be made into free adjacent locations.
+     * Checa se o Atum deve ou não ter um filho no próximo passo.
      *
-     * @param newFoxes A list to add newly born foxes to.
+     * @param newFoxes Uma lita para adicionar os atuns que nasceram.
      */
     private void giveBirth(List<Fish> newFoxes) {
         // New foxes are born into adjacent locations.
