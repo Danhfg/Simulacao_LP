@@ -36,7 +36,7 @@ public class Shark extends Fish {
                 Location newLocation = findFood(location);
                 if (newLocation == null) {
                     // No food found - try to move to a free location.
-                    newLocation = getOcean().freeAdjacentLocation(location);
+                    newLocation = getSharkFreeAdjacentLocation(location);
                 }
                 // See if it was possible to move.
                 if (newLocation != null) {
@@ -108,6 +108,55 @@ public class Shark extends Fish {
             Shark young = new Shark(ocean, loc);
             newFoxes.add(young);
         }
+    }
+
+    /**
+     * Tell the sardine to look for Seaweed adjacent to its current location.
+     * Only the first live seaweed is eaten.
+     *
+     * @param location Where in the oncean it is located.
+     * @return Where food was found, or null if it wasn't.
+     */
+    public Location getSharkFreeAdjacentLocation(Location location)
+    {
+        // The available free ones.
+        Ocean ocean = getOcean();
+        List<Location> free = ocean.getFreeAdjacentLocations(location);
+
+        Iterator<Location> it = free.iterator();
+        while (it.hasNext()) {
+            Location where = it.next();
+            if (issharkFreeAdjacentLocation(where)){
+                return where;
+            }
+        }
+        if(free.size() > 0) {
+            return free.get(0);
+        }
+        else {
+            return null;
+        }
+    }
+    
+    public boolean issharkFreeAdjacentLocation(Location location)
+    {
+        // The available free ones.
+        Ocean ocean = getOcean();
+        List<Location> locs = ocean.adjacentLocations(location);
+        int cont = 0; // contador de quantos tubarões tem na proximidade;
+        
+        Iterator<Location> it = locs.iterator();
+        while (it.hasNext()) {
+            Location where = it.next();
+            Object fish = ocean.getFishAt(where.getRow(), where.getCol());
+            if (fish instanceof Shark) {
+                cont++;
+            }
+        }
+        if (cont == 1){
+            return true;
+        }
+        return false;
     }
 
 }
