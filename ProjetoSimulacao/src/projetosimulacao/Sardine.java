@@ -2,6 +2,7 @@ package projetosimulacao;
 
 import java.util.List;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Random;
 
 /**
@@ -34,23 +35,42 @@ public class Sardine extends Fish {
             } else {
                 giveBirth(newActors);
 
-                // se estiver com fome
-                if (super.getHunger() >= super.getHungerMax() / 2) {
-                    Location location = getLocation();
-                    Location newLocation = findFood(location);
-                    if (newLocation == null) {
-                        // No food found - try to move to a free location.
-                        newLocation = getOcean().freeAdjacentLocation(location);
-                    }
-                    // See if it was possible to move.
-                    if (newLocation != null) {
-                        setLocation(newLocation);
-                    } else {
-                        // Overcrowding.
-                        setDead();
+                List<Location> locs = safeLocations();
+                if (locs == null) {
+                    Location panic = getOcean().freeAdjacentLocation(getLocation());
+
+                    if (panic != null) {
+                        setLocation(panic);
                     }
                 } else {
-
+                    // se estiver com fome
+                    if (super.getHunger() >= super.getHungerMax() / 2) {
+                        Location location = getLocation();
+                        Location newLocation = findFood(location);
+                        if (newLocation == null) {
+                            // No food found - try to move to a free location.
+                            newLocation = getOcean().freeAdjacentLocation(location);
+                        }
+                        // See if it was possible to move.
+                        if (newLocation != null) {
+                            setLocation(newLocation);
+                        } else {
+                            // Overcrowding.
+                            setDead();
+                        }
+                        
+                    //agrupar com sardinhas
+                    } else {
+                        Location newLocation = agroup();
+                        
+                        // See if it was possible to move.
+                        if (newLocation != null) {
+                            setLocation(newLocation);
+                        } else {
+                            // Overcrowding.
+                            setDead();
+                        }
+                    }
                 }
 
             }
@@ -105,40 +125,77 @@ public class Sardine extends Fish {
         return null;
 
     }
-    
-    private List<Location> safeLocations(){
-        
+
+    private List<Location> safeLocations() {
+
         Ocean ocean = getOcean();
         List<Location> freeAdjacent = ocean.getFreeAdjacentLocations(getLocation());
         Iterator<Location> it = freeAdjacent.iterator();
-        
+
         boolean predator = false;
+
+        List<Location> safe = new LinkedList<Location>();
         
         while (it.hasNext()) {
-            
+
             Location where = it.next();
-            
+
             List<Location> adjacent = ocean.adjacentLocations(getLocation());
-            
+
             predator = false;
-            
-            for(Location l : adjacent){
+
+            for (Location l : adjacent) {
                 Fish f = ocean.getFishAt(l.getRow(), l.getCol());
-                
-                if (f!=null && !(f instanceof Sardine) ){
+
+                if (f != null && !(f instanceof Sardine)) {
                     predator = true;
                 }
             }
-            
-            if (predator){
-                freeAdjacent.remove(where);
+
+            if (!predator) {
+                safe.add(where);
             }
         }
-        if (freeAdjacent.isEmpty())
+        if (safe.isEmpty()) {
             return null;
-        else       
+        } else {
             return freeAdjacent;
-       
+        }
+
+    }
+    
+    private Location agroup(){
+        Ocean ocean = getOcean();
+        List<Location> freeAdjacent = ocean.getFreeAdjacentLocations(getLocation());
+        Iterator<Location> it = freeAdjacent.iterator();
+
+        int friend;
+
+        List<Location> safe = new LinkedList<Location>();
+        
+        while (it.hasNext()) {
+
+            Location where = it.next();
+
+            List<Location> adjacent = ocean.adjacentLocations(getLocation());
+
+            friend = 0;
+
+            for (Location l : adjacent) {
+                Fish f = ocean.getFishAt(l.getRow(), l.getCol());
+
+                if (f != null && (f instanceof Sardine)) {
+                    friend++;
+                }
+                
+                if (friend > 1)
+                    return where;
+            }
+
+           
+        }
+        
+        return freeAdjacent.get(0);
     }
 
 }
